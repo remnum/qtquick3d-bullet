@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CustomControls/QPSpinbox.qml</file>
+        <file>Characters/PlaneRigidBody.qml</file>
+        <file>Controllers/MachineGunController.qml</file>
+        <file>Controllers/PlaneController.qml</file>
+        <file>Helpers/GameMapCanvas.qml</file>
+        <file>Helpers/GameMapRect.qml</file>
+        <file>Helpers/RigidBodyProperties.qml</file>
+        <file>Helpers/TargetProgressBar.qml</file>
+        <file>Rigidbodies/BlockRigidBody.qml</file>
+        <file>Rigidbodies/BombRigidBody.qml</file>
+        <file>Rigidbodies/HouseRigidBody.qml</file>
+        <file>Rigidbodies/MissleRigidBody.qml</file>
+        <file>Rigidbodies/StaticBombRigidBody.qml</file>
+        <file>Rigidbodies/TerrainRigidBody.qml</file>
+        <file>Rigidbodies/TowerRigidBody.qml</file>
+        <file>Rigidbodies/TreeRigidBody.qml</file>
+        <file>Models/MachinegunTurret.qml</file>
+        <file>Models/Plane3.qml</file>
+        <file>Characters/MachineGunRigidBody.qml</file>
+        <file>js/generateFunctions.js</file>
+        <file>Helpers/TargetSign.qml</file>
+        <file>ParticlesLibrary/ParticlesExplosion.qml</file>
+        <file>Characters/VehicleRigidBody.qml</file>
+    </qresource>
+</RCC>

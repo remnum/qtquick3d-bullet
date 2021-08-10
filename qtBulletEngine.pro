@@ -1,0 +1,60 @@
+QT += quick quick3d quick3d-private multimedia
+
+
+CONFIG += c++17
+
+# The following define makes your compiler emit warnings if you use
+# any Qt feature that has been marked deprecated (the exact warnings
+# depend on your compiler). Refer to the documentation for the
+# deprecated API to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS
+
+# You can also make your code fail to compile if it uses deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+
+INCLUDEPATH += /usr/local/include
+INCLUDEPATH += /usr/local/include/bullet
+
+LIBS += -L/usr/local/lib
+
+LIBS += /usr/local/lib/libBulletDynamics.so
+LIBS += /usr/local/lib/libBulletCollision.so
+LIBS += /usr/local/lib/libLinearMath.so
+
+
+SOURCES += \
+        humancharacter.cpp \
+        landmeshpointer.cpp \
+        landshape.cpp \
+        main.cpp \
+        qbulletphysics.cpp \
+        qbulletray.cpp \
+        qbulletrigidbody.cpp \
+        qbulletvehicle.cpp
+
+RESOURCES += qml.qrc
+
+# Additional import path used to resolve QML modules in Qt Creator's code model
+QML_IMPORT_PATH =
+
+# Additional import path used to resolve QML modules just for Qt Quick Designer
+QML_DESIGNER_IMPORT_PATH =
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    humancharacter.h \
+    landmeshpointer.h \
+    landshape.h \
+    qbulletphysics.h \
+    qbulletray.h \
+    qbulletrigidbody.h \
+    qbulletvehicle.h
+
+DISTFILES +=
