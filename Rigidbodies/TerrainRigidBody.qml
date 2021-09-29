@@ -17,7 +17,7 @@ Node {
         deActivation: false
         mass: 0.0
         force: 0.0
-        power:100
+        maxPower:100
     }
 
     Model{

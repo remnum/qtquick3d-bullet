@@ -26,7 +26,7 @@ Node {
         model: boundaryModel
         mass: 10.0
         force: 0.0
-        power:800
+        maxPower:800
         onPowerLost:  {
             explosionParticles.emitter.position=Qt.vector3d(model.position.x,model.position.y*-1.0,model.position.z)
             explosionParticles.emitter.burst(100,2000)
@@ -81,7 +81,7 @@ Node {
             x:-50
             y:-60
             from: 0
-            to:rigidbody.power
+            to:rigidbody.maxPower
             value: rigidbody.currentPower
         }
     }

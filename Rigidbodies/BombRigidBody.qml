@@ -23,7 +23,8 @@ Node {
         model: boundaryModel
         mass: 10.0
         force: 0.0
-        power:100
+        maxPower:100
+        damagePower: 10
         onActiveCollisionAction : {
             sound.play()
             explosionParticles.emitter.position=Qt.vector3d(model.position.x,model.position.y,model.position.z)

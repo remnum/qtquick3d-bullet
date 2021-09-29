@@ -25,7 +25,7 @@ Node {
         model: boundaryModel
         mass: 0.0
         force: 0.0
-        power:100
+        maxPower:100
         onReleased:
             deleteAll();
     }

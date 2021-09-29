@@ -52,6 +52,7 @@ Window {
         plane.controller.enabled = true
         plane.controller.focus = true
 
+
     }
 
 
@@ -59,16 +60,16 @@ Window {
 
 
 
-//    QBulletRay{
-//        system: phy
-//        fromNode: plane_bound
-//        length: 1000
-//        type: QBulletRay.NodeWithLength
-//        mode: QBulletRay.Normal
-//        onPointHitted: (point)=> {
-//                           target_sign.position = point
-//                       }
-//    }
+    //    QBulletRay{
+    //        system: phy
+    //        fromNode: plane_bound
+    //        length: 1000
+    //        type: QBulletRay.NodeWithLength
+    //        mode: QBulletRay.Normal
+    //        onPointHitted: (point)=> {
+    //                           target_sign.position = point
+    //                       }
+    //    }
 
 
     PlaneRigidBody{
@@ -76,11 +77,11 @@ Window {
         parent:view.scene
         position: Qt.vector3d(0.0,250.0,160.0)
     }
-//    MachineGunRigidBody{
-//        id:mgun
-//        parent:view.scene
-//        position: Qt.vector3d(0.0,250.0,-160.0)
-//    }
+    //    MachineGunRigidBody{
+    //        id:mgun
+    //        parent:view.scene
+    //        position: Qt.vector3d(0.0,250.0,-160.0)
+    //    }
 
 
     Timer {
@@ -119,16 +120,16 @@ Window {
         }
     }
 
-//    VehicleRigidBody{
-//        id:mgun
-//        parent:view.scene
-//        position: Qt.vector3d(0.0,250.0,-160.0)
-//    }
+    //    VehicleRigidBody{
+    //        id:mgun
+    //        parent:view.scene
+    //        position: Qt.vector3d(0.0,250.0,-160.0)
+    //    }
 
 
-//    QBulletVehicle{
-//        id :v1
-//    }
+    //    QBulletVehicle{
+    //        id :v1
+    //    }
 
 
     View3D {
@@ -145,12 +146,12 @@ Window {
             eulerRotation: Qt.vector3d(-45.0,180.0,0.0)
         }
 
-//        PerspectiveCamera {
-//            id:cam2
-//            pivot: Qt.vector3d(0.0,0.0,50.0)
-//            position: Qt.vector3d(plane_bound.position.x,plane_bound.position.y,plane_bound.position.z)
-//            eulerRotation: plane_bound.eulerRotation
-//        }
+        //        PerspectiveCamera {
+        //            id:cam2
+        //            pivot: Qt.vector3d(0.0,0.0,50.0)
+        //            position: Qt.vector3d(plane_bound.position.x,plane_bound.position.y,plane_bound.position.z)
+        //            eulerRotation: plane_bound.eulerRotation
+        //        }
 
         DirectionalLight {
             id:light
@@ -183,6 +184,13 @@ Window {
             }
         }
 
+        Keys.onDigit0Pressed:   {
+            explosionParticles.emitter.burst(50,500,Qt.vector3d(0.0,0.0,-300))
+            explosionParticles.emitter.burst(150,2000,Qt.vector3d(0.0,50.0,-300))
+            explosionParticles.emitter.burst(10,2000,Qt.vector3d(0.0,150.0,-300))
+
+        }
+
 
 
 
@@ -190,9 +198,8 @@ Window {
             id:target_sign
         }
 
-        ParticlesExplosion{
+        ParticlesExplosion1{
             id:explosionParticles
-
         }
 
     }
@@ -253,13 +260,13 @@ Window {
         anchors.right: parent.left
         source: "file:../qtquick3d_plane_pybullet/assets/images/chess.jpg"
     }
-//    GameMapRect{
-//        anchors.bottom: parent.bottom
-//        anchors.right: parent.right
-//        width: 160
-//        height: 120
-//        position: plane_bound.position
-//    }
+    //    GameMapRect{
+    //        anchors.bottom: parent.bottom
+    //        anchors.right: parent.right
+    //        width: 160
+    //        height: 120
+    //        position: plane_bound.position
+    //    }
 
     Rectangle{
         id:targetSigne
@@ -306,6 +313,13 @@ Window {
             }
         }
     }
+    AxisHelper{
+        id:axis
+        visible: false
+      //  scale: Qt.vector3d(0.1,0.1,0.1)
+         gridOpacity: 0.0
+    }
+
 
 
     MouseArea {
@@ -314,25 +328,28 @@ Window {
 
         onClicked: (mouse)=>{
                        if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier)) {
-                       var result = view.pick(mouse.x, mouse.y);
-                       if (result.objectHit) {
-                           var pickedObject = result.objectHit;
-                           pickedObject.isPicked = !pickedObject.isPicked;
-                           if(pickedObject.isPicked) {
-                               bodyProp.pickedObj = pickedObject
-                               bodyProp.visible = true
-                               bodyProp.x = mouse.x
-                               if((main_root.height-bodyProp.height)>mouseY)
-                               bodyProp.y = mouse.y
-                               else
-                               bodyProp.y =(main_root.height-bodyProp.height)
+                           var result = view.pick(mouse.x, mouse.y);
+                           if (result.objectHit) {
+                               var pickedObject = result.objectHit;
+                               pickedObject.isPicked = !pickedObject.isPicked;
+                               if(pickedObject.isPicked) {
+                                   axis.parent = pickedObject
+                                   axis.visible = true
+                                   bodyProp.pickedObj = pickedObject
+                                   bodyProp.visible = true
+                                   bodyProp.x = mouse.x
+                                   if((main_root.height-bodyProp.height)>mouseY)
+                                   bodyProp.y = mouse.y
+                                   else
+                                   bodyProp.y =(main_root.height-bodyProp.height)
 
-                           }
-                           else{
-                               bodyProp.visible = false
+                               }
+                               else{
+                                   axis.visible = false
+                                   bodyProp.visible = false
+                               }
                            }
                        }
-                   }
                    }
     }
 }

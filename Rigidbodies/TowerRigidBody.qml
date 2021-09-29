@@ -74,7 +74,7 @@ Node {
             x:-50
             y:-60
             from: 0
-            to:rigidbody.power
+            to:rigidbody.maxPower
             value: rigidbody.currentPower
         }
     }

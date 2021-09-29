@@ -63,7 +63,7 @@ Item {
             combo_ctype.currentIndex = rigidObj.collisionActionType
             mass.text = rigidObj.mass
             force.text = rigidObj.force
-            power.text = rigidObj.power
+            power.text = rigidObj.maxPower
             switch_simulation.checked = rigidObj.simulation
             boudaryColorOpacity.value = boundaryModel.colorOpacity
             if(!rigidObj.simulation)
@@ -340,7 +340,7 @@ Item {
                             rigidObj.collisionActionType = combo_ctype.currentIndex
                             rigidObj.mass = parseFloat(mass.text)
                             rigidObj.force= parseFloat(force.text)
-                            rigidObj.power =  parseInt(power.text)
+                            rigidObj.maxPower =  parseInt(power.text)
                             rigidObj.simulation = switch_simulation.checked
                             pickedObj.isPicked = false
                             root.visible  = false
@@ -844,53 +844,7 @@ Item {
 
                     }
                 }
-
-
-
-
-
-//                Row{
-//                    width: parent.width
-//                    height: 20
-//                    spacing: 5
-
-//                    Button{
-//                        width: parent.width*0.5-3
-//                        height: 20
-//                        text: "Cancel"
-//                        onClicked: {
-//                            pickedObj.isPicked = false
-//                            root.visible  = false
-//                            pickedObj = null;
-//                        }
-//                    }
-
-//                    Button{
-//                        width: parent.width*0.5-3
-//                        height: 20
-//                        text: "Update"
-//                        onClicked: {
-//                            boundaryModel.scale.x = parseFloat(boundary_model_scale_x.value/10.0)
-//                            boundaryModel.scale.y = parseFloat(boundary_model_scale_y.value/10.0)
-//                            boundaryModel.scale.z = parseFloat(boundary_model_scale_z.value/10.0)
-
-//                            objectModel.position.x = parseFloat(object_model_pos_x.value/10.0)
-//                            objectModel.position.y = parseFloat(object_model_pos_y.value/10.0)
-//                            objectModel.position.z = parseFloat(object_model_pos_z.value/10.0)
-
-
-//                            objectModel.scale.x = parseFloat(object_model_scale_x.value/10.0)
-//                            objectModel.scale.y = parseFloat(object_model_scale_y.value/10.0)
-//                            objectModel.scale.z = parseFloat(object_model_scale_z.value/10.0)
-
-//                            pickedObj.isPicked = false
-//                            root.visible  = false
-//                            pickedObj = null;
-//                        }
-//                    }
-//                }
             }
         }
     }
-
 }

@@ -207,7 +207,7 @@ void QBulletPhysics::updateFrame()
     foreach(QBulletRigidBody *_b ,*_explosions){
         btScalar r = ((btSphereShape*) _b->collShape())->getRadius();
         ((btSphereShape*)  _b->collShape())->setLocalScaling(btVector3(r*2,r*2,r*2));
-        if(r>_b->power()) {
+        if(r>_b->maxPower()) {
             _explosions->remove(_b);
             _bodies_to_release->insert(_b);
         }
@@ -304,6 +304,7 @@ void QBulletPhysics::CheckForCollisionEvents() {
                 if(b1->collisionActionType() != b2->collisionActionType()) {
                     qDebug() << b1 << b1->type() << b1->collisionActionType() << b1->actionType();
                     qDebug() << b2 << b2->type() << b2->collisionActionType() << b2->actionType();
+                    QBulletRigidBody::calculateCollisionPower(b1,b2);
                     b1->action();
                     b2->action();
                 }

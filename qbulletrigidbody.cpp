@@ -11,8 +11,9 @@ QBulletRigidBody::QBulletRigidBody(QObject *parent):
     _collison_action_type = PASSIVE;
     _mass = 0.0;
     _force = 0.0;
-    _power = 100.0;
-    _currentPower = 100.0;
+    _power.setMaxPower(100.0);
+    _power.setDamagePower(1.0);
+    _power.setCurrentPower(100.0);
     _body =0;
     _model = 0;
     _simulation = true;
@@ -149,27 +150,38 @@ void QBulletRigidBody::setSimulation(bool s)
     emit checkInit();
 }
 
-int QBulletRigidBody::power()
+int QBulletRigidBody::damagePower()
 {
-    return _power;
+    return _power.damagePower();
 }
 
-void QBulletRigidBody::setPower(int p)
+void QBulletRigidBody::setDamagePower(int p)
 {
-    _power = p;
-    emit powerChanged();
-    _currentPower = p;
+    _power.setDamagePower(p);
+    emit damagePowerChanged();
+}
+
+int QBulletRigidBody::maxPower()
+{
+    return _power.maxPower();
+}
+
+void QBulletRigidBody::setMaxPower(int p)
+{
+    _power.setMaxPower(p);
+    emit maxPowerChanged();
+    _power.setCurrentPower(p);
     emit currentPowerChanged();
 }
 
 int QBulletRigidBody::currentPower()
 {
-    return _currentPower;
+    return _power.currentPower();
 }
 
 void QBulletRigidBody::setCurrentPower(int p)
 {
-    _currentPower = p;
+    _power.setCurrentPower(p);
     emit currentPowerChanged();
 }
 
@@ -236,11 +248,10 @@ void QBulletRigidBody::action()
         break;
 
     case QBulletRigidBody::COLLESION_POWER_LOSS_DELETE :
-        _currentPower -= 100;
-        if(_currentPower > 0 ) {
+        if(_power.currentPower() > 0 ) {
             emit currentPowerChanged();
         }
-        else if(_currentPower <= 0 ) {
+        else if(_power.currentPower() <= 0 ) {
             _system->addRigidBodytoReleaseList(this);
         }
         break;
@@ -249,11 +260,10 @@ void QBulletRigidBody::action()
         break;
 
     case QBulletRigidBody::COLLESION_POWER_LOSS_ACTION_DELETE :
-        _currentPower -= 100;
-        if(_currentPower > 0 && !_action_status) {
+        if(_power.currentPower() > 0 && !_action_status) {
             emit currentPowerChanged();
         }
-        else if(_currentPower <= 0 && !_action_status) {
+        else if(_power.currentPower() <= 0 && !_action_status) {
             emit powerLost();
         }
         else if(_action_status)
@@ -278,14 +288,21 @@ void QBulletRigidBody::setActionStatus(bool a)
 
 void QBulletRigidBody::powerUp(int p)
 {
-    _power +=p;
-    emit powerChanged();
+    _power.setMaxPower(_power.maxPower()+p);
+    emit maxPowerChanged();
 }
 
 void QBulletRigidBody::powerDown(int p)
 {
-    _power -=p;
-    emit powerChanged();
+    _power.setMaxPower(_power.maxPower()-p);
+    emit maxPowerChanged();
+}
+
+void QBulletRigidBody::calculateCollisionPower(QBulletRigidBody *a, QBulletRigidBody *b)
+{
+    a->setCurrentPower(a->currentPower()-b->damagePower());
+    b->setCurrentPower(b->currentPower()-a->damagePower());
+    qDebug()  << a->currentPower() << " : " << b->currentPower();
 }
 
 void QBulletRigidBody::clearBodyFromSystem()

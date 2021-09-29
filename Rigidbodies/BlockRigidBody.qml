@@ -14,7 +14,7 @@ Node {
         model: block
         mass: 1.0
         force: 0.0
-        power:400
+        maxPower:400
         onPassiveCollisionAction: {
             actionStatus = true
         }

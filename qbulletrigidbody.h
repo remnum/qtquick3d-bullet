@@ -13,6 +13,8 @@
 #include "bullet/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h"
 #include "qbulletphysics.h"
 
+#include "bodypowersystem.h"
+
 class QBulletPhysics;
 
 class QBulletRigidBody : public QObject
@@ -28,7 +30,8 @@ class QBulletRigidBody : public QObject
     Q_PROPERTY(float mass READ mass WRITE setMass NOTIFY massChanged)
     Q_PROPERTY(float force READ force WRITE setForce NOTIFY forceChanged)
     Q_PROPERTY(bool simulation READ simulation WRITE setSimulation NOTIFY simulationChanged)
-    Q_PROPERTY(int power READ power WRITE setPower NOTIFY powerChanged)
+    Q_PROPERTY(int maxPower READ maxPower WRITE setMaxPower NOTIFY maxPowerChanged)
+    Q_PROPERTY(int damagePower READ damagePower WRITE setDamagePower NOTIFY damagePowerChanged)
     Q_PROPERTY(int currentPower READ currentPower WRITE setCurrentPower NOTIFY currentPowerChanged)
     Q_PROPERTY(bool deActivation READ deActivation WRITE setDeActivation NOTIFY deActivationChanged)
     Q_PROPERTY(bool actionStatus READ actionStatus WRITE setActionStatus NOTIFY actionStatusChanged)
@@ -95,8 +98,11 @@ signals:
     void massChanged();
     void forceChanged();
     void simulationChanged();
-    void powerChanged();
+
+    void maxPowerChanged();
+    void damagePowerChanged();
     void currentPowerChanged();
+
     void deActivationChanged();
     void actionStatusChanged();
 
@@ -128,8 +134,11 @@ public slots:
     bool    simulation();
     void    setSimulation(bool s);
 
-    int     power();
-    void    setPower(int p);
+    int     maxPower();
+    void    setMaxPower(int p);
+
+    int     damagePower();
+    void    setDamagePower(int p);
 
     int     currentPower();
     void    setCurrentPower(int p);
@@ -148,6 +157,9 @@ public slots:
     void powerUp(int);
     void powerDown(int);
 
+public:
+    void static calculateCollisionPower(QBulletRigidBody*,QBulletRigidBody*);
+
 
 private:
     void clearBodyFromSystem();
@@ -162,9 +174,8 @@ private:
     float   _mass;
     float   _force;
     bool    _simulation;
-    int     _power;
 
-    int _currentPower;
+    BodyPowerSystem _power;
 
     btRigidBody* _body;
     btCollisionShape* _collShape;
