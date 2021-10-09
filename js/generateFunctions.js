@@ -1,5 +1,5 @@
-function generateTerrian() {
-    var b = Qt.createQmlObject("import \"../Rigidbodies\"; TerrainRigidBody{position:  Qt.vector3d(0.0,-50.0,-100.0);}"
+function generateTerrian(x_pos,y_pos) {
+    var b = Qt.createQmlObject("import \"../Rigidbodies\"; TerrainRigidBody{position:  Qt.vector3d("+x_pos+",-50,"+y_pos+");}"
                                ,main_root,"terrian"+i)
     i++
 }

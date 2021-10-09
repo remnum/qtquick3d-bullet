@@ -102,7 +102,7 @@ Window {
         running: true
         repeat: true
         onTriggered: {
-            phy.updateFrame()
+          //  phy.updateFrame()
         }
     }
 
@@ -113,7 +113,13 @@ Window {
                              }
         Component.onCompleted: {
             phyTimer.running = true
-            Genefunc.generateTerrian()
+            for(var i=0;i<16;i++){
+                var row = parseInt(i/4)
+                var col = i%4
+                Genefunc.generateTerrian(row*600,col*600)
+            }
+
+
             Genefunc.generateHouse()
             Genefunc.generateBlocks()
             Genefunc.generateTower()
@@ -144,6 +150,7 @@ Window {
             pivot: Qt.vector3d(0.0,0,-800.0)
             position: Qt.vector3d(0.0,300.0,0.0)
             eulerRotation: Qt.vector3d(-45.0,180.0,0.0)
+//            frustumCullingEnabled:true
         }
 
         //        PerspectiveCamera {
@@ -167,6 +174,7 @@ Window {
             id: sceneEnvironment
             clearColor: "#444488"
             backgroundMode: SceneEnvironment.Color
+            aoSampleRate: 30
         }
 
         Keys.onTabPressed: {
