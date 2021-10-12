@@ -45,6 +45,7 @@ Window {
     property var currentController:0;
 
     property var listToDestroy:[]
+    property var terrainTiles : []
 
 
     Component.onCompleted: {
@@ -102,7 +103,7 @@ Window {
         running: true
         repeat: true
         onTriggered: {
-          //  phy.updateFrame()
+            phy.updateFrame()
         }
     }
 
@@ -196,8 +197,16 @@ Window {
             explosionParticles.emitter.burst(50,500,Qt.vector3d(0.0,0.0,-300))
             explosionParticles.emitter.burst(150,2000,Qt.vector3d(0.0,50.0,-300))
             explosionParticles.emitter.burst(10,2000,Qt.vector3d(0.0,150.0,-300))
-
         }
+
+        Keys.onDigit1Pressed:   {
+            var obj = terrainTiles.pop()
+            console.log(obj)
+            console.log(terrainTiles.length)
+            obj.visible = false
+        }
+
+
 
 
 

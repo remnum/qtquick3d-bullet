@@ -5,6 +5,8 @@ import LandShape 1.0
 
 Node {
     id:root
+    visible: true
+
     QBulletRigidBody{
         id:land_mesh_body
   //      system:phy
@@ -22,7 +24,7 @@ Node {
 
     Model{
         id:rectmesh
-        visible: true
+        visible: root.visible
         parent: view.scene
         position:  root.position
         scale:  Qt.vector3d(300.0,6.0,300.0)

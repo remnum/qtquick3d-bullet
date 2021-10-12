@@ -2,6 +2,7 @@ function generateTerrian(x_pos,y_pos) {
     var b = Qt.createQmlObject("import \"../Rigidbodies\"; TerrainRigidBody{position:  Qt.vector3d("+x_pos+",-50,"+y_pos+");}"
                                ,main_root,"terrian"+i)
     i++
+    terrainTiles.push(b)
 }
 
 function generateHouse() {
