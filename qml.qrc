@@ -25,5 +25,7 @@
         <file>ParticlesLibrary/ParticlesExplosion.qml</file>
         <file>Characters/VehicleRigidBody.qml</file>
         <file>ParticlesLibrary/ParticlesExplosion1.qml</file>
+        <file>Characters/CharacterRigidBody.qml</file>
+        <file>Controllers/CharacterController.qml</file>
     </qresource>
 </RCC>

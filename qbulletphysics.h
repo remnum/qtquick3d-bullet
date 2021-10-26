@@ -17,13 +17,12 @@
 
 #include "qbulletrigidbody.h"
 #include "qbulletray.h"
-#include "humancharacter.h"
 #include "qbulletvehicle.h"
 
 class QBulletRigidBody;
 class QBulletRay;
 class QBulletVehicle;
-class HumanCharacter;
+//class HumanCharacter;
 
 class QBulletPhysics : public QObject
 {
@@ -45,7 +44,7 @@ public slots:
 
     void addRigidBody(QBulletRigidBody*);
     void releaseRigidBody(QBulletRigidBody*);
-    void setHumanCharacter(HumanCharacter*);
+ //   void setHumanCharacter(HumanCharacter*);
 
     void addVehicle(QBulletVehicle*);
 
@@ -88,7 +87,7 @@ private:
 
     QList<QBulletRay*> *rays;
     QList<QBulletRay*> *instance_rays;
-    HumanCharacter *human;
+//    HumanCharacter *human;
 };
 
 #endif // QBULLETPHYSICS_H

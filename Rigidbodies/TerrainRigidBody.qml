@@ -27,7 +27,7 @@ Node {
         visible: root.visible
         parent: view.scene
         position:  root.position
-        scale:  Qt.vector3d(300.0,6.0,300.0)
+        scale:  Qt.vector3d(300.0,300.0,300.0)
         eulerRotation:Qt.vector3d(0.0,0.0,0.0)
         castsShadows: true
 

@@ -5,7 +5,7 @@
 #include <landshape.h>
 #include <qbulletrigidbody.h>
 #include <qbulletray.h>
-#include <humancharacter.h>
+#include <charactercontrolbody.h>
 #include <qbulletvehicle.h>
 
 #include <landmeshpointer.h>
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<QBulletRigidBody>("QBulletRigidBody", 1, 0, "QBulletRigidBody");
     qmlRegisterType<QBulletVehicle>("QBulletVehicle", 1, 0, "QBulletVehicle");
     qmlRegisterType<QBulletRay>("QBulletRay", 1, 0, "QBulletRay");
-    qmlRegisterType<HumanCharacter>("HumanCharacter", 1, 0, "HumanCharacter");
+    qmlRegisterType<CharacterControlBody>("CharacterControlBody", 1, 0, "CharacterControlBody");
 
 //    qmlRegisterUncreatableType<BODY_TYPE>("QBulletPhysics.types", 1, 0, "BODY_TYPE", "Not creatable as it is an enum type");
 

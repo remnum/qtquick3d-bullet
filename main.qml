@@ -12,7 +12,7 @@ import LandShape 1.0
 import QBulletPhysics 1.0
 import QBulletRigidBody 1.0
 import QBulletRay 1.0
-import HumanCharacter 1.0
+import CharacterControlBody 1.0
 import LandMeshPointer 1.0
 
 import QBulletVehicle 1.0
@@ -73,11 +73,17 @@ Window {
     //    }
 
 
-    PlaneRigidBody{
+//    PlaneRigidBody{
+//        id:plane
+//        parent:view.scene
+//        position: Qt.vector3d(0.0,250.0,160.0)
+//    }
+    CharacterRigidBody{
         id:plane
         parent:view.scene
         position: Qt.vector3d(0.0,250.0,160.0)
     }
+
     //    MachineGunRigidBody{
     //        id:mgun
     //        parent:view.scene
@@ -114,14 +120,14 @@ Window {
                              }
         Component.onCompleted: {
             phyTimer.running = true
-            for(var i=0;i<16;i++){
+            for(var i=0;i<1;i++){
                 var row = parseInt(i/4)
                 var col = i%4
                 Genefunc.generateTerrian(row*600,col*600)
             }
 
 
-            Genefunc.generateHouse()
+           // Genefunc.generateHouse()
             Genefunc.generateBlocks()
             Genefunc.generateTower()
         }
@@ -153,13 +159,6 @@ Window {
             eulerRotation: Qt.vector3d(-45.0,180.0,0.0)
 //            frustumCullingEnabled:true
         }
-
-        //        PerspectiveCamera {
-        //            id:cam2
-        //            pivot: Qt.vector3d(0.0,0.0,50.0)
-        //            position: Qt.vector3d(plane_bound.position.x,plane_bound.position.y,plane_bound.position.z)
-        //            eulerRotation: plane_bound.eulerRotation
-        //        }
 
         DirectionalLight {
             id:light
@@ -193,27 +192,22 @@ Window {
             }
         }
 
-        Keys.onDigit0Pressed:   {
-            explosionParticles.emitter.burst(50,500,Qt.vector3d(0.0,0.0,-300))
-            explosionParticles.emitter.burst(150,2000,Qt.vector3d(0.0,50.0,-300))
-            explosionParticles.emitter.burst(10,2000,Qt.vector3d(0.0,150.0,-300))
-        }
+//        Keys.onDigit0Pressed:   {
+//            explosionParticles.emitter.burst(50,500,Qt.vector3d(0.0,0.0,-300))
+//            explosionParticles.emitter.burst(150,2000,Qt.vector3d(0.0,50.0,-300))
+//            explosionParticles.emitter.burst(10,2000,Qt.vector3d(0.0,150.0,-300))
+//        }
 
-        Keys.onDigit1Pressed:   {
-            var obj = terrainTiles.pop()
-            console.log(obj)
-            console.log(terrainTiles.length)
-            obj.visible = false
-        }
+//        Keys.onDigit1Pressed:   {
+//            var obj = terrainTiles.pop()
+//            console.log(obj)
+//            console.log(terrainTiles.length)
+//            obj.visible = false
+//        }
 
-
-
-
-
-
-        TargetSign{
-            id:target_sign
-        }
+//        TargetSign{
+//            id:target_sign
+//        }
 
         ParticlesExplosion1{
             id:explosionParticles
@@ -285,19 +279,19 @@ Window {
     //        position: plane_bound.position
     //    }
 
-    Rectangle{
-        id:targetSigne
-        anchors.horizontalCenter:parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: parent.height * 11 / 20
-        visible:false
-        width: 100
-        height: 100
-        color: "#00000000"
-        border.width: 2
-        border.color: "#888888"
-        radius: width * 0.5
-    }
+//    Rectangle{
+//        id:targetSigne
+//        anchors.horizontalCenter:parent.horizontalCenter
+//        anchors.top: parent.top
+//        anchors.topMargin: parent.height * 11 / 20
+//        visible:false
+//        width: 100
+//        height: 100
+//        color: "#00000000"
+//        border.width: 2
+//        border.color: "#888888"
+//        radius: width * 0.5
+//    }
 
     Slider{
         z:10

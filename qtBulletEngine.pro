@@ -27,7 +27,7 @@ LIBS += /usr/local/lib/libLinearMath.so
 
 SOURCES += \
         bodypowersystem.cpp \
-        humancharacter.cpp \
+        charactercontrolbody.cpp \
         landmeshpointer.cpp \
         landshape.cpp \
         main.cpp \
@@ -51,7 +51,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     bodypowersystem.h \
-    humancharacter.h \
+    charactercontrolbody.h \
     landmeshpointer.h \
     landshape.h \
     qbulletphysics.h \

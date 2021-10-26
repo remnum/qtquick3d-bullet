@@ -12,7 +12,7 @@ QBulletPhysics::QBulletPhysics(QObject *parent) : QObject(parent)
 
     rays = new QList<QBulletRay*>;
     instance_rays = new QList<QBulletRay*>;
-    human = 0;
+    //human = 0;
 
     collisionConfiguration = new btDefaultCollisionConfiguration();
     dispatcher = new btCollisionDispatcher(collisionConfiguration);
@@ -56,11 +56,11 @@ void QBulletPhysics::releaseRigidBody(QBulletRigidBody *rb)
     dynamicsWorld->removeCollisionObject(rb->body());
 }
 
-void QBulletPhysics::setHumanCharacter(HumanCharacter *h)
-{
-    human = h;
-    dynamicsWorld->addRigidBody(human->body());
-}
+//void QBulletPhysics::setHumanCharacter(HumanCharacter *h)
+//{
+//    human = h;
+//    dynamicsWorld->addRigidBody(human->body());
+//}
 
 void QBulletPhysics::addVehicle(QBulletVehicle *v)
 {
@@ -161,19 +161,19 @@ void QBulletPhysics::updateFrame()
 {
     QBulletRigidBody *rb=0;
 
-    if(human != 0) {
-        btTransform trans;
+//    if(human != 0) {
+//        btTransform trans;
 
-        trans.setOrigin(btVector3(human->model()->position().x()
-                                  ,human->model()->position().y()
-                                  ,human->model()->position().z()));
+//        trans.setOrigin(btVector3(human->model()->position().x()
+//                                  ,human->model()->position().y()
+//                                  ,human->model()->position().z()));
 
-        trans.setRotation(btQuaternion(human->model()->rotation().x()
-                                       ,human->model()->rotation().y()
-                                       ,human->model()->rotation().z()
-                                       ,human->model()->rotation().scalar()));
-        human->body()->setWorldTransform(trans);
-    }
+//        trans.setRotation(btQuaternion(human->model()->rotation().x()
+//                                       ,human->model()->rotation().y()
+//                                       ,human->model()->rotation().z()
+//                                       ,human->model()->rotation().scalar()));
+//        human->body()->setWorldTransform(trans);
+//    }
 
 
     foreach(QBulletRay* qray ,*rays){
@@ -274,19 +274,19 @@ void QBulletPhysics::updateFrame()
             }
         }
 
-        if(human != 0){
-            if(body == human->body()) {
-                trans = human->body()->getWorldTransform();
-                human->model()->setPosition(QVector3D(trans.getOrigin().getX()
-                                                      ,trans.getOrigin().getY()
-                                                      ,trans.getOrigin().getZ()));
+//        if(human != 0){
+//            if(body == human->body()) {
+//                trans = human->body()->getWorldTransform();
+//                human->model()->setPosition(QVector3D(trans.getOrigin().getX()
+//                                                      ,trans.getOrigin().getY()
+//                                                      ,trans.getOrigin().getZ()));
 
-                human->model()->setRotation(QQuaternion(trans.getRotation().getW()
-                                                        ,trans.getRotation().getX()
-                                                        ,trans.getRotation().getY()
-                                                        ,trans.getRotation().getZ()));
-            }
-        }
+//                human->model()->setRotation(QQuaternion(trans.getRotation().getW()
+//                                                        ,trans.getRotation().getX()
+//                                                        ,trans.getRotation().getY()
+//                                                        ,trans.getRotation().getZ()));
+//            }
+//        }
     }
 
     CheckForCollisionEvents();
